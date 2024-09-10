@@ -2,7 +2,6 @@ import soundfile as sf
 import io
 import librosa
 from pathlib import Path
-from typing import Union
 
 
 def load_bytes(bytes_data, **librosa_kwargs):
@@ -11,7 +10,7 @@ def load_bytes(bytes_data, **librosa_kwargs):
 
 
 def load(filename_or_bytes, **librosa_kwargs):
-    if isinstance(filename_or_bytes,Union[str,Path]) and Path(filename_or_bytes).exists():
+    if isinstance(filename_or_bytes, (str, Path)) and Path(filename_or_bytes).exists():
         return librosa.load(filename_or_bytes, **librosa_kwargs)
     else:
         try:
@@ -29,7 +28,7 @@ def save(y, sr, filename=None, **soundfile_kwargs):
     if filename is None:
         format = soundfile_kwargs.pop("format", "WAV")
         buffer = io.BytesIO()
-        sf.write(buffer, y, 24000, format=format, **soundfile_kwargs)
+        sf.write(buffer, y, sr, format=format, **soundfile_kwargs)
         buffer.seek(0)
         binary_data = buffer.getvalue()
         return binary_data
