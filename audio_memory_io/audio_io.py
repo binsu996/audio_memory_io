@@ -1,7 +1,7 @@
 import soundfile as sf
 import io
 import librosa
-import pathlib as path
+import pathlib as Path
 
 
 def load_bytes(bytes_data, **librosa_kwargs):
