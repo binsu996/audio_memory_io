@@ -1,7 +1,8 @@
 import soundfile as sf
 import io
 import librosa
-import pathlib as Path
+from pathlib import Path
+from typing import Union
 
 
 def load_bytes(bytes_data, **librosa_kwargs):
@@ -10,7 +11,7 @@ def load_bytes(bytes_data, **librosa_kwargs):
 
 
 def load(filename_or_bytes, **librosa_kwargs):
-    if Path(filename_or_bytes).exists():
+    if isinstance(filename_or_bytes,Union[str,Path]) and Path(filename_or_bytes).exists():
         return librosa.load(filename_or_bytes, **librosa_kwargs)
     else:
         try:
